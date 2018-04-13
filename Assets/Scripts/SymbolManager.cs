@@ -21,6 +21,7 @@ public class SymbolManager : MonoBehaviour {
 	void gestureDone (string gestureTried) {
 		if (gm.GetComponent<Settings> ().log) {
 			Debug.Log ("Gestured Tried: " + gestureTried);
+			Debug.Log ("I have: ");
 			foreach (GameObject symbol in symbols) {
 				Debug.Log (symbol.GetComponent<Symbol> ().className);
 			}

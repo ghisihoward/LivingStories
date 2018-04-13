@@ -58,8 +58,8 @@ public class NativeStoriesPDollar : MonoBehaviour {
 				strokeId = -1;
 				points.Clear ();
 				foreach (LineRenderer lineRenderer in gestureLinesRenderer) {
-					//lineRenderer.positionCount = 0;
-					lineRenderer.SetVertexCount (0);
+					lineRenderer.positionCount = 0;
+					//lineRenderer.SetVertexCount (0);
 					Destroy (lineRenderer.gameObject);
 				}
 				gestureLinesRenderer.Clear ();
@@ -76,8 +76,8 @@ public class NativeStoriesPDollar : MonoBehaviour {
 		if (Input.GetMouseButton (0)) {
 			points.Add (new Point (virtualKeyPosition.x, -virtualKeyPosition.y, strokeId));
 
-			//currentGestureLineRenderer.positionCount = ++vertexCount;
-			currentGestureLineRenderer.SetVertexCount (++vertexCount);
+			currentGestureLineRenderer.positionCount = ++vertexCount;
+			//currentGestureLineRenderer.SetVertexCount (++vertexCount);
 			currentGestureLineRenderer.SetPosition (vertexCount - 1, Camera.main.ScreenToWorldPoint (new Vector3 (virtualKeyPosition.x, virtualKeyPosition.y, 10)));
 		}
 
