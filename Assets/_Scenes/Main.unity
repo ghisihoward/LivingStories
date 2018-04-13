@@ -368,7 +368,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   log: 1
-  fadedSymbolColor: {r: 0, g: 0, b: 0, a: 0}
+  possibleSymbols:
+  - {fileID: 1122447531145918, guid: 7d95d0408a42778439e201854606af04, type: 2}
+  - {fileID: 1091959380464034, guid: e99ccf9c30cd02b4bb0e5717f82fe2d0, type: 2}
+  - {fileID: 1163543203690044, guid: 2286809b826e211419121c5f78fabc13, type: 2}
 --- !u!1 &1823443753
 GameObject:
   m_ObjectHideFlags: 0

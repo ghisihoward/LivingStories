@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class SymbolManager : MonoBehaviour {
-
+	
 	private GameObject gm;
 	private ArrayList symbols = null;
 
@@ -30,7 +30,6 @@ public class SymbolManager : MonoBehaviour {
 		foreach (GameObject symbol in symbols) {
 			if (symbol.GetComponent<Symbol> ().className.Equals (gestureTried)) {
 				symbols.Remove (symbol);
-				symbol.GetComponent<SpriteRenderer> ().color = gm.GetComponent<Settings> ().fadedSymbolColor;
 				gm.BroadcastMessage ("correctSymbol");
 			}
 		}

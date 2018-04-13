@@ -5,4 +5,5 @@ using UnityEngine;
 public class Symbol : MonoBehaviour {
 
 	public string className;
+	public Sprite image;
 }

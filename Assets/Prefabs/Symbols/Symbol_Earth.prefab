@@ -51,4 +51,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e2cba5cb68c3944e90db30d62ee3b28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  className: Person
+  className: Earth
+  image: {fileID: 21300000, guid: 9453c6c63551d64439e0422f0d4a8f16, type: 3}

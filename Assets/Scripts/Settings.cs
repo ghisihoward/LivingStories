@@ -5,5 +5,5 @@ using UnityEngine;
 public class Settings : MonoBehaviour {
 
 	public bool log = false;
-	public Color fadedSymbolColor;
+	public GameObject[] possibleSymbols;
 }
