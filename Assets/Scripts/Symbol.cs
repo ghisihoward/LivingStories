@@ -19,7 +19,7 @@ public class Symbol : MonoBehaviour
 		gameSettings = gm.GetComponent<Settings>();
 	}
 
-	void Update()
+	public void doUpdate()
 	{
 		transform.Translate(Vector2.down * Time.deltaTime * gameSettings.gameSpeed);
 

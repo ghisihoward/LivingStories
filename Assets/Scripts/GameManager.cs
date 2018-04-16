@@ -7,17 +7,24 @@ public class GameManager : MonoBehaviour
 {
 
 	private float timer = 0, totalTime;
-	private GameObject gm, textTime, textPoints;
+	private GameObject gm, textTime, textPoints, menu;
 	private Settings gameSettings;
 	private SymbolManager symbolManager;
 	private int symbolToTest = 0, gamePoints = 0;
 
+	private enum GameState
+	{
+		Paused,
+		Running,
+	}
+
 	private enum TypeOfRun
 	{
 		Test,
-		Normal}
-	;
+		Normal
+	}
 
+	private GameState gameState = GameState.Paused;
 	private TypeOfRun currentRun = TypeOfRun.Normal;
 
 	// Use this for initialization
@@ -26,6 +33,7 @@ public class GameManager : MonoBehaviour
 		gm = GameObject.Find("GameManager");
 		textTime = GameObject.Find("TextTime");
 		textPoints = GameObject.Find("TextPoints");
+		menu = GameObject.Find("Menu");
 		gameSettings = gm.GetComponent<Settings>();
 		symbolManager = GameObject.Find("SymbolManager").GetComponent<SymbolManager>();
 	}
@@ -33,25 +41,45 @@ public class GameManager : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		timer += Time.deltaTime;
-		totalTime += Time.deltaTime;
-		textTime.GetComponent<Text>().text = "Time: " + totalTime.ToString("#0.##");
-		textPoints.GetComponent<Text>().text = gamePoints.ToString("0") + " Points";
-
-		if (timer >= gameSettings.spawnInterval) {
+		if (gamePoints < 0) {
+			gameState = GameState.Paused;
+			gamePoints = 0;
 			timer = 0;
-			switch (currentRun) {
-				case TypeOfRun.Test:
-					symbolManager.addToSequence(symbolToTest);
-					Debug.Log("Doing Test");
-					break;
-				case TypeOfRun.Normal:
-					symbolManager.addRandomToSequence();
-					Debug.Log("Doing Normal");
-					break;
-				default:
-					break;
-			}
+			totalTime = 0;
+			menu.SetActive(true);
+			symbolManager.reset();
+		}
+
+		switch (gameState) {
+			case GameState.Paused:
+				break;
+
+			case GameState.Running:
+
+				timer += Time.deltaTime;
+				totalTime += Time.deltaTime;
+				textTime.GetComponent<Text>().text = "Time: " + totalTime.ToString("#0.##");
+				textPoints.GetComponent<Text>().text = gamePoints.ToString("0") + " Points";
+				symbolManager.doUpdate();	
+
+				if (timer >= gameSettings.spawnInterval) {
+					timer = 0;
+					switch (currentRun) {
+						case TypeOfRun.Test:
+							symbolManager.addToSequence(symbolToTest);
+							break;
+						case TypeOfRun.Normal:
+							symbolManager.addRandomToSequence();
+							break;
+						default:
+							break;
+					}
+				}
+
+				break;
+
+			default:
+				break;
 		}
 	}
 
@@ -67,5 +95,36 @@ public class GameManager : MonoBehaviour
 	public void LostSymbol()
 	{
 		gamePoints -= 1;
+	}
+
+	public void SetGameMode(int option)
+	{
+		switch (option) {
+			case 0:
+				menu.SetActive(false);
+				symbolToTest = 0;
+				currentRun = TypeOfRun.Test;
+				gameState = GameState.Running;
+				break;
+			case 1:
+				menu.SetActive(false);
+				symbolToTest = 1;
+				currentRun = TypeOfRun.Test;
+				gameState = GameState.Running;
+				break;
+			case 2:
+				menu.SetActive(false);
+				symbolToTest = 2;
+				currentRun = TypeOfRun.Test;
+				gameState = GameState.Running;
+				break;
+			case 3:
+				menu.SetActive(false);
+				currentRun = TypeOfRun.Normal;
+				gameState = GameState.Running;
+				break;
+			default:
+				break;
+		}
 	}
 }

@@ -17,6 +17,21 @@ public class SymbolManager : MonoBehaviour
 		symbols = new ArrayList();
 	}
 
+	public void doUpdate()
+	{
+		foreach (GameObject symbol in symbols) {
+			symbol.GetComponent<Symbol>().doUpdate();
+		}
+	}
+
+	public void reset()
+	{
+		foreach (GameObject symbol in symbols) {
+			symbol.GetComponent<Symbol>().SelfDestruct();
+		}
+		symbols.Clear();
+	}
+
 	public void addToSequence(GameObject symbol)
 	{
 		GameObject symbolObject = Instantiate(symbol, this.transform);
