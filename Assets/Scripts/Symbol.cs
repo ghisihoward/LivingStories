@@ -10,38 +10,49 @@ public class Symbol : MonoBehaviour
 
 	private GameObject gm, symbolManager;
 	private Settings gameSettings;
+	private bool toDestroy = false;
 
 	// Use this for initialization
-	void Start()
+	void Start ()
 	{
-		gm = GameObject.Find("GameManager");
-		symbolManager = GameObject.Find("SymbolManager");
-		gameSettings = gm.GetComponent<Settings>();
+		gm = GameObject.Find ("GameManager");
+		symbolManager = GameObject.Find ("SymbolManager");
+		gameSettings = gm.GetComponent<Settings> ();
 	}
 
-	public void doUpdate()
+	public void doUpdate ()
 	{
-		transform.Translate(Vector2.down * Time.deltaTime * gameSettings.gameSpeed);
+		transform.Translate (Vector2.down * Time.deltaTime * gameSettings.gameSpeed * gameSettings.currentGameDif);
 
-		Vector3 screenPoint = Camera.main.WorldToViewportPoint(this.transform.position);
+		Vector3 screenPoint = Camera.main.WorldToViewportPoint (this.transform.position);
 		bool onScreen = (
-		                    screenPoint.z > 0 &&
-		                    screenPoint.x > 0 && screenPoint.x < 1 &&
-		                    screenPoint.y > -0.1 && screenPoint.y < 1
+		                        screenPoint.z > 0 &&
+		                        screenPoint.x > 0 && screenPoint.x < 1 &&
+		                        screenPoint.y > -0.1 && screenPoint.y < 1
 		                );
 
 		if (!onScreen) {
-			gm.BroadcastMessage("LostSymbol");
-			symbolManager.GetComponent<SymbolManager>().lostSymbol(this.gameObject);
+			gm.BroadcastMessage ("LostSymbol");
+			symbolManager.GetComponent<SymbolManager> ().lostSymbol (this.gameObject);
 		}
 	}
 
-	void OnBecameInvisible()
+	void OnBecameInvisible ()
 	{
 	}
 
-	public void SelfDestruct()
+	public void SelfDestruct ()
 	{
-		Destroy(this.gameObject);
+		Destroy (this.gameObject);
+	}
+
+	public void setToDestroy (bool toggle)
+	{
+		toDestroy = toggle;
+	}
+
+	public bool getToDestroy ()
+	{
+		return toDestroy;
 	}
 }

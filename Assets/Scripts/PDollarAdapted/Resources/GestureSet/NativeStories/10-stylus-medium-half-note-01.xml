@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<Gesture Name="half_note~01" Subject="10" InputType="stylus" Speed="MEDIUM" NumPts="76">
+<Gesture Name="Earth" Subject="10" InputType="stylus" Speed="MEDIUM" NumPts="76">
 	<Stroke index="1">
 		<Point X="115" Y="8" T="1302126537136" Pressure="128" />
 		<Point X="116" Y="-3" T="1302126537136" Pressure="128" />
