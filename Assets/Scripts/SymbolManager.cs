@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class SymbolManager : MonoBehaviour
 {
 	
-	private GameObject gm;
+	private GameObject gm, textSymbol;
 	private Settings gameSettings;
 	private List<GameObject> symbols = null;
 
@@ -13,6 +13,7 @@ public class SymbolManager : MonoBehaviour
 	void Start ()
 	{
 		gm = GameObject.Find ("GameManager");
+		textSymbol = GameObject.Find ("TextSymbol");
 		gameSettings = gm.GetComponent<Settings> ();
 		symbols = new List<GameObject> ();
 	}
@@ -74,6 +75,9 @@ public class SymbolManager : MonoBehaviour
 	// Checks if it was correctly swiped
 	void gestureDone (string gestureTried)
 	{
+		if (textSymbol.activeInHierarchy)
+			textSymbol.GetComponent<Text> ().text = gestureTried;
+
 		if (gm.GetComponent<Settings> ().log) {
 			Debug.Log ("Gestured Tried: " + gestureTried);
 			Debug.Log ("I had: ");

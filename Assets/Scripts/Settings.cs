@@ -10,5 +10,6 @@ public class Settings : MonoBehaviour
 	public float gameSpeed = 0.8f;
 	public float spawnInterval = 3;
 	public float currentGameDif = 1;
+	public float difFluctuation = 1.10f;
 	public GameObject[] possibleSymbols;
 }

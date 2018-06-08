@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
 	{
 		gamePoints += 1 + combo;
 		combo += 1;
-		gameSettings.currentGameDif *= 1.025f;
+		gameSettings.currentGameDif *= gameSettings.difFluctuation;
 	}
 
 	public void WrongSymbol ()
