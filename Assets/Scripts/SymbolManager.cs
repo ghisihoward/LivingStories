@@ -2,24 +2,20 @@
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class SymbolManager : MonoBehaviour
-{
-	
-	private GameObject gm, textSymbol;
+public class SymbolManager : MonoBehaviour {
+	private bool wolfPowerUp = false;
+	private GameObject gm;
 	private Settings gameSettings;
 	private List<GameObject> symbols = null;
 
 	// Use this for initialization
-	void Start ()
-	{
+	void Start () {
 		gm = GameObject.Find ("GameManager");
-		textSymbol = GameObject.Find ("TextSymbol");
 		gameSettings = gm.GetComponent<Settings> ();
 		symbols = new List<GameObject> ();
 	}
 
-	public void doUpdate ()
-	{
+	public void doUpdate () {
 		for (int i = symbols.Count - 1; i >= 0; i--) {
 			if (symbols [i].GetComponent<Symbol> ().getToDestroy ()) { 
 				GameObject remnantSymbol = symbols [i];
@@ -31,16 +27,14 @@ public class SymbolManager : MonoBehaviour
 		}
 	}
 
-	public void reset ()
-	{
+	public void reset () {
 		foreach (GameObject symbol in symbols) {
 			symbol.GetComponent<Symbol> ().SelfDestruct ();
 		}
 		symbols.Clear ();
 	}
 
-	public void addToSequence (GameObject symbol)
-	{
+	public void addToSequence (GameObject symbol) {
 		GameObject symbolObject = Instantiate (symbol, this.transform);
 		Vector3 newPos = new Vector3 (
 			                 Random.Range (-2, 2f), 
@@ -50,34 +44,36 @@ public class SymbolManager : MonoBehaviour
 		symbols.Add (symbolObject);
 	}
 
-	public void addToSequence (int arrayIndex)
-	{
-		this.addToSequence (gameSettings.possibleSymbols [arrayIndex]);
+	public void addToSequence (int arrayIndex) {
+		this.addToSequence (gameSettings.easySymbols [arrayIndex]);
 	}
 
-	public void addRandomToSequence ()
-	{
-		this.addToSequence (
-			gameSettings.possibleSymbols [Random.Range (0, gameSettings.possibleSymbols.Length)]
-		);
+	public void addRandomToSequence () {
+		if (gameSettings.currentGameDif > gameSettings.ladderGameDif && Random.Range (0f, 1f) > 0.5f) {
+			this.addToSequence (
+				gameSettings.hardSymbols [Random.Range (0, gameSettings.hardSymbols.Length)]
+			);
+		} else {
+			this.addToSequence (
+				gameSettings.easySymbols [Random.Range (0, gameSettings.easySymbols.Length)]
+			);
+		}
 	}
 
-	private void removeFromSequence (GameObject symbol)
-	{
+	private void removeFromSequence (GameObject symbol) {
 		symbol.GetComponent<Symbol> ().setToDestroy (true);
 	}
 
-	public void lostSymbol (GameObject symbol)
-	{
+	public void lostSymbol (GameObject symbol) {
 		removeFromSequence (symbol);
 	}
 
-	// Checks if it was correctly swiped
-	void gestureDone (string gestureTried)
-	{
-		if (textSymbol.activeInHierarchy)
-			textSymbol.GetComponent<Text> ().text = gestureTried;
+	public void setPowerUp (){
+		wolfPowerUp = true;
+	}
 
+	// Checks if it was correctly swiped
+	void gestureDone (string gestureTried) {
 		if (gm.GetComponent<Settings> ().log) {
 			Debug.Log ("Gestured Tried: " + gestureTried);
 			Debug.Log ("I had: ");
@@ -85,7 +81,7 @@ public class SymbolManager : MonoBehaviour
 				Debug.Log (symbol.GetComponent<Symbol> ().className);
 			}
 		}
-
+			
 		foreach (GameObject symbol in symbols) {
 			if (symbol.GetComponent<Symbol> ().className.Equals (gestureTried)) {
 				if (gm.GetComponent<Settings> ().log) {
@@ -96,6 +92,12 @@ public class SymbolManager : MonoBehaviour
 				return;
 			}
 		}
+
+		if (wolfPowerUp && gestureTried == "Wolf") {
+			transform.parent.Find("WolfPower").gameObject.SetActive(false);
+			transform.parent.GetComponent<GameManager> ().SetPowerUpWolf();
+		}
+
 		gm.BroadcastMessage ("WrongSymbol");
 	}
 }

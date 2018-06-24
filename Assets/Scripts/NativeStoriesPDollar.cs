@@ -6,8 +6,8 @@ using System.IO;
 
 using PDollarGestureRecognizer;
 
-public class NativeStoriesPDollar : MonoBehaviour {
-
+public class NativeStoriesPDollar : MonoBehaviour
+{
 	public Transform gestureOnScreenPrefab;
 
 	private int strokeId = -1;
@@ -19,6 +19,7 @@ public class NativeStoriesPDollar : MonoBehaviour {
 	private List<Point> points = new List<Point> ();
 	private List<LineRenderer> gestureLinesRenderer = new List<LineRenderer> ();
 	private LineRenderer currentGestureLineRenderer;
+	private float lineRenderTimer = 0;
 
 	private Vector3 virtualKeyPosition = Vector2.zero;
 	private Rect drawArea;
@@ -26,7 +27,8 @@ public class NativeStoriesPDollar : MonoBehaviour {
 
 	private bool recognized;
 
-	void Start () {
+	void Start ()
+	{
 		gm = GameObject.Find ("GameManager");
 		platform = Application.platform;
 
@@ -41,7 +43,20 @@ public class NativeStoriesPDollar : MonoBehaviour {
 			trainingSet.Add (GestureIO.ReadGestureFromFile (filePath));
 	}
 
-	void Update () {
+	void Update ()
+	{
+		if (recognized) {
+			currentGestureLineRenderer.GetComponent<LineRenderer> ().endColor = Color.Lerp (
+				gestureOnScreenPrefab.GetComponent<LineRenderer> ().endColor,
+				new Color (0, 0, 0, 0),
+				lineRenderTimer
+			);
+
+			if (lineRenderTimer < 1) {
+				lineRenderTimer += Time.deltaTime * 3;
+			}
+		}
+
 		if (platform == RuntimePlatform.Android || platform == RuntimePlatform.IPhonePlayer) {
 			if (Input.touchCount > 0) {
 				virtualKeyPosition = new Vector3 (Input.GetTouch (0).position.x, Input.GetTouch (0).position.y);
@@ -71,6 +86,7 @@ public class NativeStoriesPDollar : MonoBehaviour {
 				
 			gestureLinesRenderer.Add (currentGestureLineRenderer);
 			vertexCount = 0;
+			lineRenderTimer = 0;
 		}
 			
 		if (Input.GetMouseButton (0)) {

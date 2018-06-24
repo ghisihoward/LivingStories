@@ -13,16 +13,14 @@ public class Symbol : MonoBehaviour
 	private bool toDestroy = false;
 
 	// Use this for initialization
-	void Start ()
-	{
+	void Start () {
 		gm = GameObject.Find ("GameManager");
 		symbolManager = GameObject.Find ("SymbolManager");
 		gameSettings = gm.GetComponent<Settings> ();
 	}
 
-	public void doUpdate ()
-	{
-		transform.Translate (Vector2.down * Time.deltaTime * gameSettings.gameSpeed * gameSettings.currentGameDif);
+	public void doUpdate () {
+		transform.Translate (Vector2.down * Time.deltaTime * gameSettings.gameSpeed * gameSettings.currentGameDif * gameSettings.currentTimeMod);
 
 		Vector3 screenPoint = Camera.main.WorldToViewportPoint (this.transform.position);
 		bool onScreen = (
@@ -37,22 +35,18 @@ public class Symbol : MonoBehaviour
 		}
 	}
 
-	void OnBecameInvisible ()
-	{
+	void OnBecameInvisible () {
 	}
 
-	public void SelfDestruct ()
-	{
+	public void SelfDestruct () {
 		Destroy (this.gameObject);
 	}
 
-	public void setToDestroy (bool toggle)
-	{
+	public void setToDestroy (bool toggle) {
 		toDestroy = toggle;
 	}
 
-	public bool getToDestroy ()
-	{
+	public bool getToDestroy () {
 		return toDestroy;
 	}
 }

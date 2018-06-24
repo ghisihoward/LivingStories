@@ -5,46 +5,35 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-
+	private bool powerUpActive = false;
 	private int symbolToTest = 0, gamePoints = 0, lives = 0, combo;
-	private float timer = 0, totalTime;
-	private GameObject gm, textLives, textPoints, menu;
+	private float timer = 0, timerForPowerUp = 0, timerPowerActive = 0, totalTime;
+	private GameObject gm, textLives, textPoints, cameraManager;
 	private Settings gameSettings;
 	private SymbolManager symbolManager;
 
-	private enum GameState
-	{
-		Paused,
-		Running,
-	}
-
-	private enum TypeOfRun
-	{
-		Test,
-		Normal
-	}
-
+	private enum GameState { Paused, Running }
+	private enum TypeOfRun { Test, Normal }
 	private GameState gameState = GameState.Paused;
 	private TypeOfRun currentRun = TypeOfRun.Normal;
 
-	void Start ()
-	{
+	void Start () {
 		gm = GameObject.Find ("GameManager");
 		textLives = GameObject.Find ("TextLives");
 		textPoints = GameObject.Find ("TextPoints");
-		menu = GameObject.Find ("Menu");
+		cameraManager = GameObject.FindWithTag ("CameraManager");
 		gameSettings = gm.GetComponent<Settings> ();
 		symbolManager = GameObject.Find ("SymbolManager").GetComponent<SymbolManager> ();
 	}
 
-	void Update ()
-	{
+	void Update () {
 		if (lives < 0) {
 			gameState = GameState.Paused;
 			gamePoints = 0;
 			timer = 0;
+			timerForPowerUp = 0;
 			totalTime = 0;
-			menu.SetActive (true);
+			cameraManager.GetComponent<CameraManager> ().SwitchCamera(1);
 			symbolManager.reset ();
 		}
 
@@ -68,30 +57,49 @@ public class GameManager : MonoBehaviour
 					break;
 				}
 			}
+
+			if (timerForPowerUp >= gameSettings.powerUpInterval) {
+				transform.Find ("WolfPower").gameObject.SetActive (true);
+				timerForPowerUp = 0;
+				gameSettings.powerUpInterval += gameSettings.powerUpIntervalFluctuation;
+				symbolManager.setPowerUp ();
+			}
+
+			if (powerUpActive) {
+				timerPowerActive += Time.deltaTime;
+				if (timerPowerActive >= gameSettings.powerUpDuration) {
+					gameSettings.currentTimeMod = 1f;
+					timerPowerActive = 0;
+					powerUpActive = false;
+				}
+			} else {
+				timerForPowerUp += Time.deltaTime;
+			}
 		}
 	}
 
-	public void CorrectSymbol ()
-	{
+	public void CorrectSymbol () {
 		gamePoints += 1 + combo;
 		combo += 1;
-		gameSettings.currentGameDif *= gameSettings.difFluctuation;
+
+		if (gameSettings.currentGameDif <= gameSettings.maxGameDif) {
+			gameSettings.currentGameDif += gameSettings.difFluctuation;
+		} else {
+			gameSettings.currentGameDif += (gameSettings.difFluctuation / 20);
+		}
 	}
 
-	public void WrongSymbol ()
-	{
+	public void WrongSymbol () {
 		combo = 0;
 	}
 
-	public void LostSymbol ()
-	{
+	public void LostSymbol () {
 		symbolManager.reset ();
+		gameSettings.currentGameDif = 1;
 		lives -= 1;
 	}
 
-	public void SetGameMode (int option)
-	{
-		menu.SetActive (false);
+	public void SetGameMode (int option) {
 		gameState = GameState.Running;
 		symbolToTest = option;
 		lives = gameSettings.maxLives;
@@ -103,5 +111,10 @@ public class GameManager : MonoBehaviour
 		} else {
 			currentRun = TypeOfRun.Test;
 		}
+	}
+
+	public void SetPowerUpWolf () {
+		gameSettings.currentTimeMod = 0.5f;
+		powerUpActive = true;
 	}
 }

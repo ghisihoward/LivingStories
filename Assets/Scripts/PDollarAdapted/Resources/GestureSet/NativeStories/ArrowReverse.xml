@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Gesture Name = "ArrowReverse">
+	<Stroke>
+		<Point X = "101.75" Y = "-88" T = "0" Pressure = "0" />
+		<Point X = "101.75" Y = "-88" T = "0" Pressure = "0" />
+		<Point X = "101.75" Y = "-88" T = "0" Pressure = "0" />
+		<Point X = "91.75" Y = "-113" T = "0" Pressure = "0" />
+		<Point X = "58.75" Y = "-175" T = "0" Pressure = "0" />
+		<Point X = "29.75" Y = "-219" T = "0" Pressure = "0" />
+		<Point X = "26.75" Y = "-224" T = "0" Pressure = "0" />
+		<Point X = "24.75" Y = "-228" T = "0" Pressure = "0" />
+		<Point X = "23.75" Y = "-230" T = "0" Pressure = "0" />
+		<Point X = "22.75" Y = "-233" T = "0" Pressure = "0" />
+		<Point X = "20.75" Y = "-235" T = "0" Pressure = "0" />
+		<Point X = "20.75" Y = "-236" T = "0" Pressure = "0" />
+		<Point X = "20.75" Y = "-236" T = "0" Pressure = "0" />
+		<Point X = "20.75" Y = "-236" T = "0" Pressure = "0" />
+		<Point X = "20.75" Y = "-236" T = "0" Pressure = "0" />
+		<Point X = "20.75" Y = "-236" T = "0" Pressure = "0" />
+		<Point X = "20.75" Y = "-236" T = "0" Pressure = "0" />
+		<Point X = "20.75" Y = "-236" T = "0" Pressure = "0" />
+		<Point X = "20.75" Y = "-236" T = "0" Pressure = "0" />
+		<Point X = "20.75" Y = "-236" T = "0" Pressure = "0" />
+		<Point X = "30.75" Y = "-236" T = "0" Pressure = "0" />
+		<Point X = "48.75" Y = "-233" T = "0" Pressure = "0" />
+		<Point X = "58.75" Y = "-232" T = "0" Pressure = "0" />
+		<Point X = "64.75" Y = "-231" T = "0" Pressure = "0" />
+		<Point X = "74.75" Y = "-230" T = "0" Pressure = "0" />
+		<Point X = "76.75" Y = "-230" T = "0" Pressure = "0" />
+		<Point X = "76.75" Y = "-230" T = "0" Pressure = "0" />
+		<Point X = "76.75" Y = "-230" T = "0" Pressure = "0" />
+		<Point X = "76.75" Y = "-230" T = "0" Pressure = "0" />
+		<Point X = "76.75" Y = "-230" T = "0" Pressure = "0" />
+	</Stroke>
+	<Stroke>
+		<Point X = "103.75" Y = "-182" T = "0" Pressure = "0" />
+	</Stroke>
+</Gesture>
