@@ -11,7 +11,7 @@ public class AnimatorManager : MonoBehaviour {
 		cameraManager = GameObject.FindWithTag ("CameraManager").GetComponent<CameraManager> ();
 	}
 
-	public void FinishAnimationIntro () {
-		cameraManager.SwitchCamera (1);
+	public void InTheDark () {
+		cameraManager.Flashing();
 	}
 }

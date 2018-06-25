@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 	private bool powerUpActive = false;
 	private int symbolToTest = 0, gamePoints = 0, lives = 0, combo;
 	private float timer = 0, timerForPowerUp = 0, timerPowerActive = 0, totalTime;
-	private GameObject gm, textLives, textPoints, cameraManager;
+	private GameObject gm, textPoints, cameraManager;
 	private Settings gameSettings;
 	private SymbolManager symbolManager;
 
@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour
 
 	void Start () {
 		gm = GameObject.Find ("GameManager");
-		textLives = GameObject.Find ("TextLives");
 		textPoints = GameObject.Find ("TextPoints");
 		cameraManager = GameObject.FindWithTag ("CameraManager");
 		gameSettings = gm.GetComponent<Settings> ();
@@ -29,19 +28,14 @@ public class GameManager : MonoBehaviour
 	void Update () {
 		if (lives < 0) {
 			gameState = GameState.Paused;
-			gamePoints = 0;
-			timer = 0;
-			timerForPowerUp = 0;
-			totalTime = 0;
 			cameraManager.GetComponent<CameraManager> ().SwitchCamera(1);
 			symbolManager.reset ();
 		}
 
 		if (gameState == GameState.Running) {
-			timer += Time.deltaTime;
-			totalTime += Time.deltaTime;
-			textLives.GetComponent<Text> ().text = "Lives: " + lives;
-			textPoints.GetComponent<Text> ().text = gamePoints.ToString ("0") + " Points";
+			timer += Time.deltaTime * gameSettings.currentTimeMod;
+			totalTime += Time.deltaTime * gameSettings.currentTimeMod;
+			textPoints.GetComponent<Text> ().text = gamePoints.ToString ("0");
 			symbolManager.doUpdate ();	
 
 			if (timer >= gameSettings.spawnInterval / gameSettings.currentGameDif) {
@@ -66,14 +60,14 @@ public class GameManager : MonoBehaviour
 			}
 
 			if (powerUpActive) {
-				timerPowerActive += Time.deltaTime;
+				timerPowerActive += Time.deltaTime * gameSettings.currentTimeMod;
 				if (timerPowerActive >= gameSettings.powerUpDuration) {
 					gameSettings.currentTimeMod = 1f;
 					timerPowerActive = 0;
 					powerUpActive = false;
 				}
 			} else {
-				timerForPowerUp += Time.deltaTime;
+				timerForPowerUp += Time.deltaTime * gameSettings.currentTimeMod;
 			}
 		}
 	}
@@ -105,6 +99,10 @@ public class GameManager : MonoBehaviour
 		lives = gameSettings.maxLives;
 		gameSettings.currentGameDif = 1;
 		combo = 0;
+		gamePoints = 0;
+		timer = gameSettings.spawnInterval;
+		timerForPowerUp = 0;
+		totalTime = 0;
 
 		if (option == 3) {
 			currentRun = TypeOfRun.Normal;

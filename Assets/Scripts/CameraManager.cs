@@ -5,13 +5,17 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour {
 
-	private int currentScene = 0;
+	private int currentScene = 0, nextScene = 1;
 
 	private GameObject camIntro, camMenu, camGame, camOptions, camTotem;
 	private GameObject[] cameras = new GameObject[5];
 
-	public GameObject screenIntro, screenMenu, screenGame, screenOptions, screenTotem;
+	private GameObject screenIntro, screenMenu, screenGame, screenOptions, screenTotem;
 	private GameObject[] screens = new GameObject[5];
+
+	private GameObject flashOverlay;
+
+	private bool playedIntroAnimation = false, forcedSwitchIntro = false;
 
 	public void Start () {
 		camIntro = this.transform.Find ("CameraIntro").gameObject;
@@ -55,6 +59,17 @@ public class CameraManager : MonoBehaviour {
 	}
 
 	public void AnimateIntroToMenu () {
-		screenIntro.transform.Find ("Canvas").Find ("Sky").GetComponent<Animator>().SetTrigger ("End");
+		if (!playedIntroAnimation) {
+			playedIntroAnimation = true;
+			screenIntro.transform.Find ("Canvas").Find ("Sky").GetComponent<Animator>().SetTrigger ("End");	
+		} else {
+			forcedSwitchIntro = true;
+			nextScene = 1;
+			Flashing();
+		}
+	}
+
+	public void Flashing () {
+		SwitchCamera (nextScene);
 	}
 }
