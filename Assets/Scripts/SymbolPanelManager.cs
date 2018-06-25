@@ -25,7 +25,7 @@ public class SymbolPanelManager : MonoBehaviour {
 			break;
 		case 3:
 			symbolTextTitle.text = "WATER";
-			symbolTextPanel.text = "Usually representing long bodies of water, such as a river, it's symbology is rich, mostly regarding life.";
+			symbolTextPanel.text = "Usually representing long bodies of water, such as rivers, it's symbology is rich, mostly regarding life.";
 			break;
 		case 4:
 			symbolTextTitle.text = "MOTHER EARTH";
@@ -37,7 +37,7 @@ public class SymbolPanelManager : MonoBehaviour {
 			break;
 		case 6:
 			symbolTextTitle.text = "WOLF";
-			symbolTextPanel.text = "From guidance to destruction, the symbology of the wolf is deeply varied and rooted within Native American culture.";
+			symbolTextPanel.text = "From guidance to fertility, the symbology of the wolf is deeply varied and rooted within Native American culture.";
 			break;
 		default:
 			break;

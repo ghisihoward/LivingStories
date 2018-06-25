@@ -13,7 +13,7 @@ public class CameraManager : MonoBehaviour {
 	private GameObject screenIntro, screenMenu, screenGame, screenOptions, screenTotem;
 	private GameObject[] screens = new GameObject[5];
 
-	private GameObject flashOverlay, HSManager;
+	private GameObject flashOverlay, HSManager, audioManager;
 
 	private bool playedIntroAnimation = false, forcedSwitchIntro = false;
 
@@ -32,6 +32,7 @@ public class CameraManager : MonoBehaviour {
 		screenTotem = GameObject.Find ("ScreenTotem");
 		screens = new GameObject[] {screenIntro, screenMenu, screenGame, screenOptions, screenTotem};
 
+		audioManager = GameObject.FindWithTag ("AudioManager");
 		HSManager = GameObject.FindWithTag ("HSManager");
 
 		currentScene = 0;
@@ -53,8 +54,15 @@ public class CameraManager : MonoBehaviour {
 		// Prime Animators
 		if (targetScene == 1) {
 			// Changing into Menu
-			if (currentScene != 0)
+			if (currentScene != 0 && currentScene != 2) {
 				screenMenu.transform.Find ("Canvas").Find ("SkyForeground").gameObject.SetActive (false);
+			} else {
+				audioManager.GetComponent <AudioManager> ().ChangeMusic (1);
+			}
+
+		} else if (targetScene == 2) {
+			// Changing into Game
+			audioManager.GetComponent <AudioManager> ().ChangeMusic (2);
 		}
 
 		HSManager.GetComponent <HighScoreManager> ().updateScores();

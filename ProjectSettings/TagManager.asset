@@ -12,6 +12,7 @@ TagManager:
   - HSManager
   - SymbolTextPanel
   - SymbolTextTitle
+  - AudioManager
   layers:
   - Default
   - TransparentFX
