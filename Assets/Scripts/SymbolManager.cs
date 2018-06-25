@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class SymbolManager : MonoBehaviour {
 	private bool wolfPowerUp = false;
+	private int dailySeed;
+	private Random dailyRNG;
 	private GameObject gm;
 	private Settings gameSettings;
 	private List<GameObject> symbols = null;
@@ -60,6 +62,18 @@ public class SymbolManager : MonoBehaviour {
 		}
 	}
 
+	public void addDailyToSequence() {
+		if (gameSettings.currentGameDif > gameSettings.ladderGameDif && Random.Range (0f, 1f) > 0.5f) {
+			this.addToSequence (
+				gameSettings.hardSymbols [Random.Range (0, gameSettings.hardSymbols.Length)]
+			);
+		} else {
+			this.addToSequence (
+				gameSettings.easySymbols [Random.Range (0, gameSettings.easySymbols.Length)]
+			);
+		}
+	}
+
 	private void removeFromSequence (GameObject symbol) {
 		symbol.GetComponent<Symbol> ().setToDestroy (true);
 	}
@@ -70,6 +84,15 @@ public class SymbolManager : MonoBehaviour {
 
 	public void setPowerUp (){
 		wolfPowerUp = true;
+	}
+
+	public void setNormal () {
+		new Random();
+	}
+
+	public void setDaily (int seed){
+		dailySeed = seed;
+		Random.InitState(dailySeed);
 	}
 
 	// Checks if it was correctly swiped

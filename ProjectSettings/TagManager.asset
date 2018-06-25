@@ -6,6 +6,12 @@ TagManager:
   tags:
   - CameraManager
   - FlashOverlay
+  - PlayRecord
+  - DailyRecord
+  - GameManager
+  - HSManager
+  - SymbolTextPanel
+  - SymbolTextTitle
   layers:
   - Default
   - TransparentFX

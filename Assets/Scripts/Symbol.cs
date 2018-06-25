@@ -26,7 +26,7 @@ public class Symbol : MonoBehaviour
 		bool onScreen = (
 		                        screenPoint.z > 0 &&
 		                        screenPoint.x > 0 && screenPoint.x < 1 &&
-		                        screenPoint.y > -0.1 && screenPoint.y < 1
+		                        screenPoint.y > -0.2 && screenPoint.y < 1.3
 		                );
 
 		if (!onScreen) {

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+	public bool playedDaily;
 	private bool powerUpActive = false;
 	private int symbolToTest = 0, gamePoints = 0, lives = 0, combo;
 	private float timer = 0, timerForPowerUp = 0, timerPowerActive = 0, totalTime;
@@ -13,7 +14,7 @@ public class GameManager : MonoBehaviour
 	private SymbolManager symbolManager;
 
 	private enum GameState { Paused, Running }
-	private enum TypeOfRun { Test, Normal }
+	private enum TypeOfRun { Test, Normal, Daily }
 	private GameState gameState = GameState.Paused;
 	private TypeOfRun currentRun = TypeOfRun.Normal;
 
@@ -28,6 +29,18 @@ public class GameManager : MonoBehaviour
 	void Update () {
 		if (lives < 0) {
 			gameState = GameState.Paused;
+
+			switch (currentRun){
+			case TypeOfRun.Normal:
+				if (int.Parse(PlayerPrefs.GetString("PlayRecord", "0")) < gamePoints)
+					PlayerPrefs.SetString("PlayRecord", gamePoints.ToString());
+				break;
+
+			case TypeOfRun.Daily:
+				PlayerPrefs.SetString("DailyRecord", gamePoints.ToString());
+				break;
+			}
+
 			cameraManager.GetComponent<CameraManager> ().SwitchCamera(1);
 			symbolManager.reset ();
 		}
@@ -46,6 +59,9 @@ public class GameManager : MonoBehaviour
 					break;
 				case TypeOfRun.Normal:
 					symbolManager.addRandomToSequence ();
+					break;
+				case TypeOfRun.Daily:
+					symbolManager.addDailyToSequence ();
 					break;
 				default:
 					break;
@@ -94,7 +110,6 @@ public class GameManager : MonoBehaviour
 	}
 
 	public void SetGameMode (int option) {
-		gameState = GameState.Running;
 		symbolToTest = option;
 		lives = gameSettings.maxLives;
 		gameSettings.currentGameDif = 1;
@@ -104,10 +119,23 @@ public class GameManager : MonoBehaviour
 		timerForPowerUp = 0;
 		totalTime = 0;
 
-		if (option == 3) {
+		if (option == 1) {
+			gameState = GameState.Running;
 			currentRun = TypeOfRun.Normal;
-		} else {
-			currentRun = TypeOfRun.Test;
+			symbolManager.setNormal ();
+			cameraManager.GetComponent<CameraManager> ().SwitchCamera(2);
+		} else if (option == 2) {
+			if (!playedDaily){
+				string today = System.DateTime.Now.ToString("yyyyMMdd");
+
+				gameState = GameState.Running;
+				currentRun = TypeOfRun.Daily;
+				PlayerPrefs.SetString("DailyRecord", "0");
+				PlayerPrefs.SetString("PlayedDaily", today);
+				symbolManager.setDaily (int.Parse (today));
+
+				cameraManager.GetComponent<CameraManager> ().SwitchCamera(2);	
+			}
 		}
 	}
 

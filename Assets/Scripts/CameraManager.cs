@@ -13,7 +13,7 @@ public class CameraManager : MonoBehaviour {
 	private GameObject screenIntro, screenMenu, screenGame, screenOptions, screenTotem;
 	private GameObject[] screens = new GameObject[5];
 
-	private GameObject flashOverlay;
+	private GameObject flashOverlay, HSManager;
 
 	private bool playedIntroAnimation = false, forcedSwitchIntro = false;
 
@@ -31,6 +31,8 @@ public class CameraManager : MonoBehaviour {
 		screenOptions = GameObject.Find ("ScreenOptions");
 		screenTotem = GameObject.Find ("ScreenTotem");
 		screens = new GameObject[] {screenIntro, screenMenu, screenGame, screenOptions, screenTotem};
+
+		HSManager = GameObject.FindWithTag ("HSManager");
 
 		currentScene = 0;
 		SwitchCamera (0);
@@ -55,6 +57,7 @@ public class CameraManager : MonoBehaviour {
 				screenMenu.transform.Find ("Canvas").Find ("SkyForeground").gameObject.SetActive (false);
 		}
 
+		HSManager.GetComponent <HighScoreManager> ().updateScores();
 		currentScene = targetScene;
 	}
 
@@ -62,7 +65,7 @@ public class CameraManager : MonoBehaviour {
 		if (!playedIntroAnimation) {
 			playedIntroAnimation = true;
 			screenIntro.transform.Find ("Canvas").Find ("Sky").GetComponent<Animator>().SetTrigger ("StartAnimation");	
-		} else {
+		} else if(!forcedSwitchIntro) {
 			forcedSwitchIntro = true;
 			nextScene = 1;
 			screenIntro.transform.Find ("Canvas").Find ("Flasher").GetComponent<Animator>().SetTrigger ("Flash");
