@@ -61,11 +61,11 @@ public class CameraManager : MonoBehaviour {
 	public void AnimateIntroToMenu () {
 		if (!playedIntroAnimation) {
 			playedIntroAnimation = true;
-			screenIntro.transform.Find ("Canvas").Find ("Sky").GetComponent<Animator>().SetTrigger ("End");	
+			screenIntro.transform.Find ("Canvas").Find ("Sky").GetComponent<Animator>().SetTrigger ("StartAnimation");	
 		} else {
 			forcedSwitchIntro = true;
 			nextScene = 1;
-			Flashing();
+			screenIntro.transform.Find ("Canvas").Find ("Flasher").GetComponent<Animator>().SetTrigger ("Flash");
 		}
 	}
 

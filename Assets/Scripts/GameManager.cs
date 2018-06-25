@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
 		if (gameSettings.currentGameDif <= gameSettings.maxGameDif) {
 			gameSettings.currentGameDif += gameSettings.difFluctuation;
 		} else {
-			gameSettings.currentGameDif += (gameSettings.difFluctuation / 20);
+			gameSettings.currentGameDif += (gameSettings.difFluctuation / 10);
 		}
 	}
 
