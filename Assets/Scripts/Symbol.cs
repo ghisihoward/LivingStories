@@ -13,7 +13,7 @@ public class Symbol : MonoBehaviour
 	private bool toDestroy = false;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		gm = GameObject.Find ("GameManager");
 		symbolManager = GameObject.Find ("SymbolManager");
 		gameSettings = gm.GetComponent<Settings> ();

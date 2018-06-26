@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 	private GameState gameState = GameState.Paused;
 	private TypeOfRun currentRun = TypeOfRun.Normal;
 
-	void Start () {
+	void Awake () {
 		gm = GameObject.Find ("GameManager");
 		textPoints = GameObject.Find ("TextPoints");
 		cameraManager = GameObject.FindWithTag ("CameraManager");

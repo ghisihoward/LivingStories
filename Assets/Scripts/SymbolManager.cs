@@ -11,7 +11,7 @@ public class SymbolManager : MonoBehaviour {
 	private List<GameObject> symbols = null;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		gm = GameObject.Find ("GameManager");
 		gameSettings = gm.GetComponent<Settings> ();
 		symbols = new List<GameObject> ();
