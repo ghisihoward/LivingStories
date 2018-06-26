@@ -8,7 +8,7 @@ public class SymbolPanelManager : MonoBehaviour {
 	public Text symbolTextPanel, symbolTextTitle;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		symbolTextTitle = GameObject.FindWithTag ("SymbolTextTitle").GetComponent<Text> ();
 		symbolTextPanel = GameObject.FindWithTag ("SymbolTextPanel").GetComponent<Text> ();
 	}
@@ -17,27 +17,27 @@ public class SymbolPanelManager : MonoBehaviour {
 		switch (symbol) {
 		case 1:
 			symbolTextTitle.text = "ARROW";
-			symbolTextPanel.text = "A powerful tool for the Natives, the symbology of the Arrow flows from strength to protection - and even peace.";
+			symbolTextPanel.text = "A common tool used by Natives, the Arrow symbol idea flows from strength to protection - and even peace!";
 			break;
 		case 2:
 			symbolTextTitle.text = "CIRCLE";
-			symbolTextPanel.text = "Symbolic representation of balance, the circle is used to surround messages, signifying protection and guidance.";
+			symbolTextPanel.text = "It's round shape relates to balance so it often surrounds other messages. It brings protection and guidance.";
 			break;
 		case 3:
 			symbolTextTitle.text = "WATER";
-			symbolTextPanel.text = "Usually representing long bodies of water, such as rivers, it's symbology is rich, mostly regarding life.";
+			symbolTextPanel.text = "The importance of water, found on rivers and oceans, relates to the symbology of life in most Native cultures.";
 			break;
 		case 4:
-			symbolTextTitle.text = "MOTHER EARTH";
-			symbolTextPanel.text = "A sacred symbology, it identifies that which is sacred in nature and illustrates the challenges of life.";
+			symbolTextTitle.text = "EARTH";
+			symbolTextPanel.text = "Close to the idea of motherhood, earth represents what is considered sacred in nature and in the challenges of life.";
 			break;
 		case 5:
 			symbolTextTitle.text = "PERSON";
-			symbolTextPanel.text = "The symbol of mankind - used to tell stories about the inhabitants of the world, from beginning to end.";
+			symbolTextPanel.text = "A pictogram that shows mankind, it is used to tell stories about the world we live in, from beginning to end.";
 			break;
 		case 6:
 			symbolTextTitle.text = "WOLF";
-			symbolTextPanel.text = "From guidance to fertility, the symbology of the wolf is deeply varied and rooted within Native American culture.";
+			symbolTextPanel.text = "From guidance to destruction, the identity of the wolf is rich and deeply rooted within Native American culture.";
 			break;
 		default:
 			break;

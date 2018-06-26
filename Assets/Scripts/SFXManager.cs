@@ -9,7 +9,7 @@ public class SFXManager : MonoBehaviour {
 	private GameObject gameManager;
 	private float volume;
 
-	void Start () {
+	void Awake () {
 		gameManager = GameObject.FindWithTag ("GameManager");
 	}
 

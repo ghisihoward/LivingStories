@@ -507,7 +507,7 @@ GameObject:
   - component: {fileID: 201004124}
   m_Layer: 0
   m_Name: Title
-  m_TagString: SymbolTextTitle
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2762,7 +2762,7 @@ MonoBehaviour:
   maxGameDif: 3.5
   ladderGameDif: 2.4
   difFluctuation: 0.2
-  powerUpInterval: 10
+  powerUpInterval: 15
   powerUpIntervalFluctuation: 10
   powerUpDuration: 5
   particleSymbol: {fileID: 1466127876780444, guid: 03712d0d13ebf5949a4f0427557ed77c,
@@ -3443,7 +3443,7 @@ GameObject:
   - component: {fileID: 755678284}
   m_Layer: 0
   m_Name: Text
-  m_TagString: SymbolTextPanel
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3517,7 +3517,7 @@ GameObject:
   - component: {fileID: 776983503}
   m_Layer: 0
   m_Name: Title
-  m_TagString: Untagged
+  m_TagString: SymbolTextTitle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4720,7 +4720,7 @@ GameObject:
   - component: {fileID: 969287665}
   m_Layer: 0
   m_Name: Text
-  m_TagString: Untagged
+  m_TagString: SymbolTextPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7342,7 +7342,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -90, y: -39.99994}
+  m_AnchoredPosition: {x: -90, y: -40}
   m_SizeDelta: {x: 4142, y: 2171.7}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1823443755

@@ -11,11 +11,10 @@ public class HighScoreManager : MonoBehaviour {
 	private GameManager GM;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		GM = GameObject.FindWithTag ("GameManager").GetComponent<GameManager> ();
 		playRecordField = GameObject.FindWithTag ("PlayRecord").GetComponent<Text> ();
 		dailyRecordField = GameObject.FindWithTag ("DailyRecord").GetComponent<Text> ();
-
 		this.updateScores ();
 	}
 
