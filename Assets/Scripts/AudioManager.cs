@@ -27,13 +27,4 @@ public class AudioManager : MonoBehaviour {
 		}
 		this.GetComponent <AudioSource> ().volume = volume;
 	}
-
-	public void ToggleSound (bool toggle) {
-		if (toggle) {
-			volume = 1;
-		} else {
-			volume = 0;
-		}
-		this.GetComponent <AudioSource> ().volume = volume;
-	}
 }

@@ -75,6 +75,8 @@ public class SymbolManager : MonoBehaviour {
 	}
 
 	private void removeFromSequence (GameObject symbol) {
+		Instantiate(gameSettings.particleSymbol, symbol.transform.position, Quaternion.identity);
+		Instantiate(gameSettings.particleSymbolCore, symbol.transform.position, Quaternion.identity);
 		symbol.GetComponent<Symbol> ().setToDestroy (true);
 	}
 

@@ -16,6 +16,8 @@ public class Settings : MonoBehaviour {
 	public float powerUpInterval = 15f;
 	public float powerUpIntervalFluctuation = 10f;
 	public float powerUpDuration = 5f;
+	public GameObject particleSymbol;
+	public GameObject particleSymbolCore;
 	public GameObject[] easySymbols;
 	public GameObject[] hardSymbols;
 	public GameObject[] powerUpSymbols;

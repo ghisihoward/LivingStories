@@ -33,7 +33,7 @@ public class SymbolPanelManager : MonoBehaviour {
 			break;
 		case 5:
 			symbolTextTitle.text = "PERSON";
-			symbolTextPanel.text = "The symbol of mankind, used to tell stories about the inhabitants of the world, from beginning to end.";
+			symbolTextPanel.text = "The symbol of mankind - used to tell stories about the inhabitants of the world, from beginning to end.";
 			break;
 		case 6:
 			symbolTextTitle.text = "WOLF";

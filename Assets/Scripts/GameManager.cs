@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 	private GameObject gm, textPoints, cameraManager;
 	private Settings gameSettings;
 	private SymbolManager symbolManager;
+	private SFXManager sfxmg;
 
 	private enum GameState { Paused, Running }
 	private enum TypeOfRun { Test, Normal, Daily }
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
 		cameraManager = GameObject.FindWithTag ("CameraManager");
 		gameSettings = gm.GetComponent<Settings> ();
 		symbolManager = GameObject.Find ("SymbolManager").GetComponent<SymbolManager> ();
+		sfxmg = GameObject.FindWithTag ("SFXManager").GetComponent<SFXManager> ();
 	}
 
 	void Update () {
@@ -97,6 +99,8 @@ public class GameManager : MonoBehaviour
 		} else {
 			gameSettings.currentGameDif += (gameSettings.difFluctuation / 10);
 		}
+
+		sfxmg.GetComponent <SFXManager> ().playCorrectSFX();
 	}
 
 	public void WrongSymbol () {
