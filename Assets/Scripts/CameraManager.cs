@@ -80,6 +80,16 @@ public class CameraManager : MonoBehaviour {
 		}
 	}
 
+	public void AnimateMenuToGame () {
+		nextScene = 2;
+		screenMenu.transform.Find ("Canvas").Find ("Flasher").GetComponent<Animator>().SetTrigger ("Flash");
+	}
+
+	public void AnimateGameToMenu () {
+		nextScene = 1;
+		screenGame.transform.Find ("Canvas").Find ("Flasher").GetComponent<Animator>().SetTrigger ("Flash");
+	}
+
 	public void Flashing () {
 		SwitchCamera (nextScene);
 	}

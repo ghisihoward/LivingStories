@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class SymbolPanelManager : MonoBehaviour {
 
-	private Text symbolTextPanel, symbolTextTitle;
+	public Text symbolTextPanel, symbolTextTitle;
 
 	// Use this for initialization
 	void Start () {

@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 	private bool powerUpActive = false;
 	private int symbolToTest = 0, gamePoints = 0, lives = 0, combo;
 	private float timer = 0, timerForPowerUp = 0, timerPowerActive = 0, totalTime;
-	private GameObject gm, textPoints, cameraManager;
+	private GameObject gm, textPoints, cameraManager, gameOverPanel;
 	private Settings gameSettings;
 	private SymbolManager symbolManager;
 	private SFXManager sfxmg;
@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
 		gameSettings = gm.GetComponent<Settings> ();
 		symbolManager = GameObject.Find ("SymbolManager").GetComponent<SymbolManager> ();
 		sfxmg = GameObject.FindWithTag ("SFXManager").GetComponent<SFXManager> ();
+		gameOverPanel = GameObject.Find ("GameOverPanel");
 	}
 
 	void Update () {
@@ -43,8 +44,9 @@ public class GameManager : MonoBehaviour
 				break;
 			}
 
-			cameraManager.GetComponent<CameraManager> ().SwitchCamera(1);
 			symbolManager.reset ();
+			gameOverPanel.SetActive (true);
+			gameOverPanel.transform.Find("Text").GetComponent<Text> ().text = "SCORE : " + gamePoints;
 		}
 
 		if (gameState == GameState.Running) {
@@ -122,12 +124,13 @@ public class GameManager : MonoBehaviour
 		timer = gameSettings.spawnInterval;
 		timerForPowerUp = 0;
 		totalTime = 0;
+		gameOverPanel.SetActive (false);
 
 		if (option == 1) {
 			gameState = GameState.Running;
 			currentRun = TypeOfRun.Normal;
 			symbolManager.setNormal ();
-			cameraManager.GetComponent<CameraManager> ().SwitchCamera(2);
+			cameraManager.GetComponent<CameraManager> ().AnimateMenuToGame();
 		} else if (option == 2) {
 			if (!playedDaily){
 				string today = System.DateTime.Now.ToString("yyyyMMdd");
@@ -138,7 +141,7 @@ public class GameManager : MonoBehaviour
 				PlayerPrefs.SetString("PlayedDaily", today);
 				symbolManager.setDaily (int.Parse (today));
 
-				cameraManager.GetComponent<CameraManager> ().SwitchCamera(2);	
+				cameraManager.GetComponent<CameraManager> ().AnimateMenuToGame();	
 			}
 		}
 	}
