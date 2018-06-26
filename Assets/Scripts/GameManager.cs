@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
 	}
 
 	void Update () {
-		if (lives < 0) {
+		if (lives < 0 && gameState == GameState.Running) {
 			gameState = GameState.Paused;
 
 			switch (currentRun){
@@ -44,9 +44,7 @@ public class GameManager : MonoBehaviour
 				break;
 			}
 
-			symbolManager.reset ();
-			gameOverPanel.SetActive (true);
-			gameOverPanel.transform.Find("Text").GetComponent<Text> ().text = "SCORE : " + gamePoints;
+			this.transform.parent.Find("Lightning").GetComponent<Animator> ().SetTrigger("Light");
 		}
 
 		if (gameState == GameState.Running) {
@@ -110,7 +108,6 @@ public class GameManager : MonoBehaviour
 	}
 
 	public void LostSymbol () {
-		symbolManager.reset ();
 		gameSettings.currentGameDif = 1;
 		lives -= 1;
 	}
@@ -149,5 +146,11 @@ public class GameManager : MonoBehaviour
 	public void SetPowerUpWolf () {
 		gameSettings.currentTimeMod = 0.5f;
 		powerUpActive = true;
+	}
+
+	public void ResetGame () {
+		symbolManager.reset ();
+		gameOverPanel.SetActive (true);
+		gameOverPanel.transform.Find("Text").GetComponent<Text> ().text = "SCORE : " + gamePoints;
 	}
 }
