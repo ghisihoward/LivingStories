@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 	private bool powerUpActive = false;
 	private int symbolToTest = 0, gamePoints = 0, lives = 0, combo;
 	private float timer = 0, timerForPowerUp = 0, timerPowerActive = 0, totalTime;
-	private GameObject gm, textPoints, cameraManager, gameOverPanel;
+	private GameObject gm, textPoints, cameraManager, gameOverPanel, wolfPowerIcon;
 	private Settings gameSettings;
 	private SymbolManager symbolManager;
 	private SFXManager sfxmg, wfsfxmg;
@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
 		sfxmg = GameObject.FindWithTag ("SFXManager").GetComponent<SFXManager> ();
 		wfsfxmg = GameObject.FindWithTag ("WolfSFXManager").GetComponent<SFXManager> ();
 		gameOverPanel = GameObject.Find ("GameOverPanel");
+		wolfPowerIcon = GameObject.FindWithTag ("WolfPowerIcon");
 	}
 
 	void Update () {
@@ -72,7 +73,7 @@ public class GameManager : MonoBehaviour
 			}
 
 			if (timerForPowerUp >= gameSettings.powerUpInterval) {
-				transform.Find ("WolfPower").gameObject.SetActive (true);
+				wolfPowerIcon.SetActive (true);
 				timerForPowerUp = 0;
 				gameSettings.powerUpInterval += gameSettings.powerUpIntervalFluctuation;
 				symbolManager.setPowerUp ();
@@ -114,6 +115,8 @@ public class GameManager : MonoBehaviour
 	}
 
 	public void SetGameMode (int option) {
+		wolfPowerIcon.SetActive (false);
+		powerUpActive = false;
 		symbolToTest = option;
 		lives = gameSettings.maxLives;
 		gameSettings.currentGameDif = 1;
@@ -123,6 +126,7 @@ public class GameManager : MonoBehaviour
 		timer = gameSettings.spawnInterval;
 		timerForPowerUp = 0;
 		totalTime = 0;
+		symbolManager.clearPowerUp ();
 		gameOverPanel.SetActive (false);
 
 		if (option == 1) {

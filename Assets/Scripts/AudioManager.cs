@@ -21,7 +21,7 @@ public class AudioManager : MonoBehaviour {
 
 	public void ToggleMusic (bool toggle) {
 		if (toggle) {
-			volume = 1;
+			volume = 0.7f;
 		} else {
 			volume = 0;
 		}

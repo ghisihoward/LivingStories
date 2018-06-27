@@ -6,7 +6,7 @@ public class SymbolManager : MonoBehaviour {
 	private bool wolfPowerUp = false;
 	private int dailySeed;
 	private Random dailyRNG;
-	private GameObject gm;
+	private GameObject gm, wolfPowerIcon;
 	private Settings gameSettings;
 	private List<GameObject> symbols = null;
 
@@ -15,6 +15,7 @@ public class SymbolManager : MonoBehaviour {
 		gm = GameObject.Find ("GameManager");
 		gameSettings = gm.GetComponent<Settings> ();
 		symbols = new List<GameObject> ();
+		wolfPowerIcon = GameObject.FindWithTag ("WolfPowerIcon");
 	}
 
 	public void doUpdate () {
@@ -88,6 +89,10 @@ public class SymbolManager : MonoBehaviour {
 		wolfPowerUp = true;
 	}
 
+	public void clearPowerUp () {
+		wolfPowerUp = false;
+	}
+
 	public void setNormal () {
 		new Random();
 	}
@@ -100,6 +105,7 @@ public class SymbolManager : MonoBehaviour {
 	// Checks if it was correctly swiped
 	void gestureDone (string gestureTried) {
 		if (gm.GetComponent<Settings> ().log) {
+			GameObject.FindWithTag("DebugLog").GetComponent<Text> ().text = gestureTried;
 			Debug .Log ("Gestured Tried: " + gestureTried);
 			Debug.Log ("I had: ");
 			foreach (GameObject symbol in symbols) {
@@ -119,8 +125,9 @@ public class SymbolManager : MonoBehaviour {
 		}
 
 		if (wolfPowerUp && gestureTried == "Wolf") {
-			transform.parent.Find("WolfPower").gameObject.SetActive(false);
+			wolfPowerIcon.gameObject.SetActive(false);
 			transform.parent.GetComponent<GameManager> ().SetPowerUpWolf();
+			wolfPowerUp = false;
 		}
 
 		gm.BroadcastMessage ("WrongSymbol");

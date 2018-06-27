@@ -16,6 +16,8 @@ TagManager:
   - SFXManager
   - StoryTellerMenu
   - WolfSFXManager
+  - WolfPowerIcon
+  - DebugLog
   layers:
   - Default
   - TransparentFX
