@@ -105,7 +105,6 @@ public class SymbolManager : MonoBehaviour {
 	// Checks if it was correctly swiped
 	void gestureDone (string gestureTried) {
 		if (gm.GetComponent<Settings> ().log) {
-			GameObject.FindWithTag("DebugLog").GetComponent<Text> ().text = gestureTried;
 			Debug .Log ("Gestured Tried: " + gestureTried);
 			Debug.Log ("I had: ");
 			foreach (GameObject symbol in symbols) {
