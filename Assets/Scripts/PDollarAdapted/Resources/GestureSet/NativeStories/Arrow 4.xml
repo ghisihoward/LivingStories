@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Gesture Name = "Arrow">
+	<Stroke>
+		<Point X = "64.375" Y = "-354" T = "0" Pressure = "0" />
+		<Point X = "69.375" Y = "-341" T = "0" Pressure = "0" />
+		<Point X = "73.375" Y = "-325" T = "0" Pressure = "0" />
+		<Point X = "84.375" Y = "-265" T = "0" Pressure = "0" />
+		<Point X = "94.375" Y = "-195" T = "0" Pressure = "0" />
+		<Point X = "97.375" Y = "-170" T = "0" Pressure = "0" />
+		<Point X = "99.375" Y = "-159" T = "0" Pressure = "0" />
+		<Point X = "100.375" Y = "-154" T = "0" Pressure = "0" />
+		<Point X = "101.375" Y = "-154" T = "0" Pressure = "0" />
+		<Point X = "102.375" Y = "-154" T = "0" Pressure = "0" />
+		<Point X = "102.375" Y = "-154" T = "0" Pressure = "0" />
+		<Point X = "102.375" Y = "-154" T = "0" Pressure = "0" />
+		<Point X = "102.375" Y = "-154" T = "0" Pressure = "0" />
+		<Point X = "104.375" Y = "-159" T = "0" Pressure = "0" />
+		<Point X = "114.375" Y = "-183" T = "0" Pressure = "0" />
+		<Point X = "129.375" Y = "-215" T = "0" Pressure = "0" />
+		<Point X = "141.375" Y = "-236" T = "0" Pressure = "0" />
+	</Stroke>
+</Gesture>
