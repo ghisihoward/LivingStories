@@ -12,7 +12,7 @@ public class TutorialManager : MonoBehaviour {
 	}
 
 	public void Advance () {
-		if (phase < 3){
+		if (phase < 2){
 			this.GetComponent<Animator> ().SetTrigger("Advance");
 			phase += 1;
 		} else {
