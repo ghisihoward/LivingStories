@@ -54,6 +54,7 @@ public class CameraManager : MonoBehaviour {
 
 		// Prime Animators
 		if (targetScene == 1) {
+			screenMenu.transform.Find("Canvas").Find("Tutorial").gameObject.SetActive(false);
 			// Changing into Menu
 			if (currentScene != 0 && currentScene != 2) {
 				screenMenu.transform.Find ("Canvas").Find ("SkyForeground").gameObject.SetActive (false);
@@ -93,5 +94,19 @@ public class CameraManager : MonoBehaviour {
 
 	public void Flashing () {
 		SwitchCamera (nextScene);
+	}
+
+	public void SeeTutorial () {
+		audioManager.GetComponent<AudioManager> ().ChangeMusic (3);
+		screenMenu.transform.Find("Canvas").Find("MenuList").gameObject.SetActive(false);
+		screenMenu.transform.Find("Canvas").Find("Tutorial").gameObject.SetActive(true);
+		storyTeller.gameObject.transform.Find("ButtonToTutorial").gameObject.SetActive(false);
+	}
+
+	public void LeaveTutorial () {
+		audioManager.GetComponent<AudioManager> ().ChangeMusic (1);
+		screenMenu.transform.Find("Canvas").Find("MenuList").gameObject.SetActive(true);
+		screenMenu.transform.Find("Canvas").Find("Tutorial").gameObject.SetActive(false);
+		storyTeller.gameObject.transform.Find("ButtonToTutorial").gameObject.SetActive(true);
 	}
 }
