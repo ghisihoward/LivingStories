@@ -15,6 +15,7 @@ TagManager:
   - AudioManager
   - SFXManager
   - StoryTellerMenu
+  - WolfSFXManager
   layers:
   - Default
   - TransparentFX

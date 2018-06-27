@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SFXManager : MonoBehaviour {
 
-	public AudioClip buttonSFX, buttonLockSFX;
+	public AudioClip buttonSFX, buttonLockSFX, wolfSFX;
 	public AudioClip[] correctSFXs;
 	private GameObject gameManager;
 	private float volume;
@@ -33,6 +33,12 @@ public class SFXManager : MonoBehaviour {
 		this.GetComponent <AudioSource> ().clip = correctSFXs[Random.Range(0, correctSFXs.Length)];
 		this.GetComponent <AudioSource> ().pitch = Random.Range(0.9f, 1.1f);
 		this.GetComponent <AudioSource> ().Play ();
+	}
+
+	public void playWolfSFX () {
+		this.GetComponent <AudioSource> ().clip = wolfSFX;
+		this.GetComponent <AudioSource> ().pitch = Random.Range(0.9f, 1.1f);
+		this.GetComponent <AudioSource> ().Play ();		
 	}
 
 	public void ToggleSound (bool toggle) {

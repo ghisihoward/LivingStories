@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 	private GameObject gm, textPoints, cameraManager, gameOverPanel;
 	private Settings gameSettings;
 	private SymbolManager symbolManager;
-	private SFXManager sfxmg;
+	private SFXManager sfxmg, wfsfxmg;
 
 	private enum GameState { Paused, Running }
 	private enum TypeOfRun { Test, Normal, Daily }
@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
 		gameSettings = gm.GetComponent<Settings> ();
 		symbolManager = GameObject.Find ("SymbolManager").GetComponent<SymbolManager> ();
 		sfxmg = GameObject.FindWithTag ("SFXManager").GetComponent<SFXManager> ();
+		wfsfxmg = GameObject.FindWithTag ("WolfSFXManager").GetComponent<SFXManager> ();
 		gameOverPanel = GameObject.Find ("GameOverPanel");
 	}
 
@@ -116,6 +117,7 @@ public class GameManager : MonoBehaviour
 		symbolToTest = option;
 		lives = gameSettings.maxLives;
 		gameSettings.currentGameDif = 1;
+		gameSettings.currentTimeMod = 1;
 		combo = 0;
 		gamePoints = 0;
 		timer = gameSettings.spawnInterval;
@@ -144,6 +146,7 @@ public class GameManager : MonoBehaviour
 	}
 
 	public void SetPowerUpWolf () {
+		wfsfxmg.GetComponent <SFXManager> ().playWolfSFX();
 		gameSettings.currentTimeMod = 0.5f;
 		powerUpActive = true;
 	}
