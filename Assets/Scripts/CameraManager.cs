@@ -13,7 +13,7 @@ public class CameraManager : MonoBehaviour {
 	private GameObject screenIntro, screenMenu, screenGame, screenOptions, screenTotem;
 	private GameObject[] screens = new GameObject[5];
 
-	private GameObject flashOverlay, HSManager, audioManager;
+	private GameObject flashOverlay, HSManager, audioManager, storyTeller;
 
 	private bool playedIntroAnimation = false, forcedSwitchIntro = false;
 
@@ -34,6 +34,7 @@ public class CameraManager : MonoBehaviour {
 
 		audioManager = GameObject.FindWithTag ("AudioManager");
 		HSManager = GameObject.FindWithTag ("HSManager");
+		storyTeller = GameObject.FindWithTag ("StoryTellerMenu");
 
 		currentScene = 0;
 		SwitchCamera (0);
